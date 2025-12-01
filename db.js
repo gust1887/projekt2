@@ -9,7 +9,8 @@ db.serialize(() => {
     name TEXT NOT NULL,
     email TEXT NOT NULL,
     password TEXT NOT NULL,
-    salt TEXT NOT NULL
+    salt TEXT NOT NULL,
+    userType TEXT CHECK(role IN ('host', 'participant')) DEFAULT 'participant'
   )`);
 
     // Samtaler

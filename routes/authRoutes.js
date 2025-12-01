@@ -8,12 +8,12 @@ const { hashPassword, validatePassword } = require('../utils/auth');
 
 // Register endpoint
 router.post('/register', (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, userType } = req.body;
     const { salt, hash } = hashPassword(password);
 
     db.run(
-        `INSERT INTO users (name, email, password, salt) VALUES (?, ?, ?, ?)`,
-        [name, email, hash, salt],
+        `INSERT INTO users (name, email, password, salt, userType) VALUES (?, ?, ?, ?, ?)`,
+        [name, email, hash, salt, userType],
         function (err) {
             if (err) return res.status(500).json({ error: err.message });
             res.json({ id: this.lastID });
