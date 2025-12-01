@@ -1,0 +1,83 @@
+/* Hero-sektion med stort billede  */
+.hero-section {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: translateY(-70px); 
+  /* justering af udsnit */
+}
+
+/* Login / opret-bruger links under hero-billedet
+ */
+.frontpage-auth-links {
+  text-align: center;
+  padding: 30px 0 40px 0;
+}
+
+.frontpage-auth-links a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 14px;
+}
+
+.frontpage-auth-links a:hover {
+  text-decoration: underline;
+}
+
+/* Floating knap-boks midt på hero-billedet */
+.frontpage-action-box {
+  position: absolute;
+  top: 350px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10;
+  width: 260px;
+}
+
+/* Knapper i boksen (lodret layout) */
+.action-btn {
+  padding: 14px 20px;
+  border-radius: 14px;
+  background-color: #00C8FF;
+  color: #021624;          
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #00b4e6;
+}
+
+/* Informationssektion i bunden af forsiden */
+.frontpage-bottom-info {
+  background-color: #021624;
+  text-align: center;
+}
+
+.frontpage-bottom-info h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.frontpage-bottom-info p {
+  font-size: 15px;
+  opacity: 0.85;
+  margin: 0;
+}
