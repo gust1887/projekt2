@@ -20,7 +20,7 @@
 }
 
 .frontpage-auth-links a {
-  color: #f1f97e;         /* Citrus tekst - Har fundet den ved at undersÃ¸ge layoutet fra Understory */
+  color: #f1f97e;              /* Citrus tekst - Har fundet den ved at undersøge layoutet fra Understory */
   text-decoration: none;
   margin: 0 8px;
   font-size: 14px;
@@ -47,8 +47,8 @@
 .action-btn {
   padding: 14px 20px;
   border-radius: 14px;
-  background-color: #f1f97e;     /* Citrus */
-  color: #2C622C;              /* GrÃ¸n tekst */
+  background-color: #f1f97e;   /* Citrus */
+  color: #214E27;            /* Grøn tekst */
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -66,7 +66,7 @@
 
 /* Informationssektion i bunden af forsiden */
 .frontpage-bottom-info {
-  background-color: #2C622C;   /* Main grÃ¸n */
+  background-color: #214E27;   /* Main grøn */
   text-align: center;
   padding: 0px 60px;
 }
