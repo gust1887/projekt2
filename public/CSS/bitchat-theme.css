@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-  background-color: #2C622C;   /* Main grÃ¸n baggrund */
+  background-color: #214E27;   /* Main grøn baggrund */
   color: #ffffff;              /* Citrus standardtekst */
   font-family: Arial, sans-serif;
 }
@@ -18,7 +18,7 @@ body {
   align-items: center;
   height: 70px;
   padding: 0 40px;
-  background-color: #2C622C;   /* Samme grÃ¸n som body */
+  background-color: #214E27;   /* Samme grøn som body */
 }
 
 /* Logo i topbaren */
@@ -39,7 +39,7 @@ body {
   padding: 8px 18px;
   border-radius: 999px;
   background-color: #f1f97e;   /* Citrus knap */
-  color: #2C622C;              /* GrÃ¸n tekst */
+  color: #214E27;              /* Grøn tekst */
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
@@ -49,7 +49,7 @@ body {
 }
 
 .nav-right a:hover {
-  background-color: #e4ee74;   /* Let mÃ¸rkere citrus ved hover */
+  background-color: #e4ee74;   /* Let mørkere citrus ved hover */
 }
 
 /* === TILBAGE-TIL-FORSIDE SEKTION === */
@@ -65,7 +65,7 @@ body {
   display: inline-block;
   padding: 12px 28px;
   background-color: #f1f97e;   /* Citrus knap */
-  color: #2C622C;              /* GrÃ¸n tekst */
+  color: #214E27;              /* Grøn tekst */
   font-weight: 600;
   text-decoration: none;
   border-radius: 12px;
@@ -86,7 +86,7 @@ body {
 }
 
 .form-box {
-  background-color: #234D23;   /* Lidt mÃ¸rkere grÃ¸n boks kontra citrus*/
+  background-color: #234D23;   /* Lidt mørkere grøn boks kontra citrus*/
   padding: 40px 50px;
   border-radius: 20px;
   width: 420px;
@@ -122,7 +122,7 @@ body {
   padding: 14px 20px;
   border-radius: 12px;
   background-color: #f1f97e;   /* Citrus */
-  color: #2C622C;              /* GrÃ¸n tekst */
+  color: #214E27;              /* Grøn tekst */
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -179,7 +179,7 @@ body {
   text-decoration: underline;
 }
 
-/* Floating knap-boks midt pÃ¥ hero-billedet */
+/* Floating knap-boks midt på hero-billedet */
 .frontpage-action-box {
   position: absolute;
   top: 350px;
@@ -197,7 +197,7 @@ body {
   padding: 14px 20px;
   border-radius: 14px;
   background-color: #f1f97e;   /* Citrus */
-  color: #2C622C;              /* GrÃ¸n tekst */
+  color: #214E27;              /* Grøn tekst */
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -215,7 +215,7 @@ body {
 
 /* Informationssektion i bunden af forsiden */
 .frontpage-bottom-info {
-  background-color: #2C622C;   /* Main grÃ¸n */
+  background-color: #214E27;   /* Main grøn */
   text-align: center;
   padding: 40px 0 60px 0;
 }
