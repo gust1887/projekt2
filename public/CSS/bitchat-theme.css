@@ -1,4 +1,4 @@
-/* Grundopsætning af siden */
+/* Globalt tema  */
 html, body {
   margin: 0;
   padding: 0;
@@ -6,19 +6,19 @@ html, body {
 }
 
 body {
-  background-color: #031426;
-  color: #ffffff;
+  background-color: #2C622C;   /* Main grÃ¸n baggrund */
+  color: #ffffff;              /* Citrus standardtekst */
   font-family: Arial, sans-serif;
 }
 
-/* Topbar layout (logo venstre, menupunkter højre) */
+/* Top baren */
 .top-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 70px;
   padding: 0 40px;
-  background-color: #031426;
+  background-color: #2C622C;   /* Samme grÃ¸n som body */
 }
 
 /* Logo i topbaren */
@@ -37,87 +37,200 @@ body {
 /* Menupunkter som knapper (topbar) */
 .nav-right a {
   padding: 8px 18px;
-  border-radius: 10px;
-  background-color: #00C8FF;
-  color: #031426;
+  border-radius: 999px;
+  background-color: #f1f97e;   /* Citrus knap */
+  color: #2C622C;              /* GrÃ¸n tekst */
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   margin-left: 16px;
   transition: 0.2s ease;
+  border: none;
 }
 
 .nav-right a:hover {
-  background-color: #00b4e6;
+  background-color: #e4ee74;   /* Let mÃ¸rkere citrus ved hover */
 }
 
-
+/* === TILBAGE-TIL-FORSIDE SEKTION === */
 .back-to-frontpage {
-  margin-top: 500px; /* skub ned */
+  margin-top: 400px;
   display: flex;
   justify-content: center;
   padding-bottom: 60px;
 }
 
-
-/* Selve tilbage-knappen */
+/* Tilbage-knap */
 .back-btn {
-    display: inline-block;
-    padding: 12px 28px;
-    background-color: #00C8FF;   
-    color: #031426;               
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 12px;
-    transition: 0.2s ease;
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: #f1f97e;   /* Citrus knap */
+  color: #2C622C;              /* GrÃ¸n tekst */
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 
 .back-btn:hover {
-    background-color: #00B4E6;   
+  background-color: #e4ee74;
+}
 
-
-
-/* Boks til formular-sider */
+/* (login, opret bruger, glemt adgangskode) */
 .form-section {
-    display: flex;
-    justify-content: center;
-    padding-top: 80px;
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
 }
 
 .form-box {
-    background-color: #042038;
-    padding: 40px 50px;
-    border-radius: 14px;
-    width: 360px;
-    text-align: center;
+  background-color: #234D23;   /* Lidt mÃ¸rkere grÃ¸n boks kontra citrus*/
+  padding: 40px 50px;
+  border-radius: 20px;
+  width: 420px;
+  text-align: center;
+  color: #f1f97e;
 }
 
+/* Overskrift i form-boks */
 .form-box h1 {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
+  font-size: 36px;
+  font-weight: 800;
 }
 
+/* Formular-layout */
 .form-box form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
+/* Inputfelter */
 .form-box input {
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  outline: none;
 }
 
+/* Knapper inde i formularer */
+.action-btn {
+  padding: 14px 20px;
+  border-radius: 12px;
+  background-color: #f1f97e;   /* Citrus */
+  color: #2C622C;              /* GrÃ¸n tekst */
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #e4ee74;
+}
+
+/* Links under formularer */
 .form-link {
-    display: inline-block;
-    margin-top: 12px;
-    font-size: 14px;
-    color: #ffffff;
-    opacity: 0.8;
-    text-decoration: none;
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #f1f97e;
+  opacity: 0.9;
+  text-decoration: none;
 }
 
 .form-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+/* Hero-sektion med stort billede  */
+.hero-section {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: translateY(-70px); 
+}
+
+
+.frontpage-auth-links a {
+  color: #f1f97e;              /* Citrus tekst */
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 14px;
+}
+
+.frontpage-auth-links a:hover {
+  text-decoration: underline;
+}
+
+/* Floating knap-boks midt pÃ¥ hero-billedet */
+.frontpage-action-box {
+  position: absolute;
+  top: 350px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10;
+  width: 260px;
+}
+
+/* Knapper i boksen (lodret layout) */
+.action-btn {
+  padding: 14px 20px;
+  border-radius: 14px;
+  background-color: #f1f97e;   /* Citrus */
+  color: #2C622C;              /* GrÃ¸n tekst */
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #e4ee74;
+}
+
+/* Informationssektion i bunden af forsiden */
+.frontpage-bottom-info {
+  background-color: #2C622C;   /* Main grÃ¸n */
+  text-align: center;
+  padding: 40px 0 60px 0;
+}
+
+.frontpage-bottom-info h2 {
+  font-size: 28px;
+  font-weight: 800;            /* Tyk skrift */
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  color: #f1f97e;              /* "Nem kommunikation..." */
+}
+
+.frontpage-bottom-info p {
+  font-size: 15px;
+  opacity: 0.9;
+  margin: 0;
+  color: #f1f97e;              /* Bund undertekst */
 }
