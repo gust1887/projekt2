@@ -3,6 +3,7 @@
   width: 100%;
   height: 600px;
   overflow: hidden;
+  position: relative;
 }
 
 .hero-image {
@@ -10,18 +11,16 @@
   height: auto;
   display: block;
   transform: translateY(-70px); 
-  /* justering af udsnit */
 }
 
-/* Login / opret-bruger links under hero-billedet
- */
+/* Eventuelle links under hero (hvis de bruges) */
 .frontpage-auth-links {
   text-align: center;
   padding: 30px 0 40px 0;
 }
 
 .frontpage-auth-links a {
-  color: #ffffff;
+  color: #f1f97e;         /* Citrus tekst - Har fundet den ved at undersÃ¸ge layoutet fra Understory */
   text-decoration: none;
   margin: 0 8px;
   font-size: 14px;
@@ -31,7 +30,7 @@
   text-decoration: underline;
 }
 
-/* Floating knap-boks midt på hero-billedet */
+/* Boksen ved hero-logoet */
 .frontpage-action-box {
   position: absolute;
   top: 350px;
@@ -44,12 +43,12 @@
   width: 260px;
 }
 
-/* Knapper i boksen (lodret layout) */
+/* Knapper i boksen  */
 .action-btn {
   padding: 14px 20px;
   border-radius: 14px;
-  background-color: #00C8FF;
-  color: #021624;          
+  background-color: #f1f97e;     /* Citrus */
+  color: #2C622C;              /* GrÃ¸n tekst */
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -57,27 +56,32 @@
   width: 100%;
   box-sizing: border-box;
   transition: 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 
 .action-btn:hover {
-  background-color: #00b4e6;
+  background-color: #e4ee74;
 }
 
 /* Informationssektion i bunden af forsiden */
 .frontpage-bottom-info {
-  background-color: #021624;
+  background-color: #2C622C;   /* Main grÃ¸n */
   text-align: center;
+  padding: 0px 60px;
 }
 
 .frontpage-bottom-info h2 {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 800;            /* Tyk skrift */
   margin-bottom: 12px;
   letter-spacing: 1px;
+  color: #ffffff;             /* Citrus overskrift "Nem kommunikation..." */
 }
 
 .frontpage-bottom-info p {
-  font-size: 15px;
-  opacity: 0.85;
+  font-size: 17px;
+  opacity: 0.9;
   margin: 0;
+  color: #ffffff;              /* Citrus undertekst */
 }
