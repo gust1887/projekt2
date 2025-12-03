@@ -47,5 +47,6 @@ app.use('/api/auth', authRoutes);
 const port = 3000;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
+  console.log('Ændrede filer: db.js, routes/authRoutes.js, utils/mail.js, package.json');
+  console.log('Glemt kode rute: POST /api/auth/forgot-password med body {"email": "brugers@mail.com"}');
 })
-

@@ -3,6 +3,8 @@ const router = express.Router();
 
 const { db } = require('../db');
 const { hashPassword, validatePassword } = require('../utils/auth');
+const { sendMail } = require('../utils/mail');
+const crypto = require('crypto');
 
 
 
@@ -37,6 +39,32 @@ router.post('/login', (req, res) => {
             }
         }
     );
+});
+
+// Simpel rute til glemt password der sender nulstillingskode på mail
+router.post('/forgot-password', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) return res.status(400).json({ error: "Email mangler" });
+
+    db.get(`SELECT id FROM users WHERE email = ?`, [email], (err, user) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        const token = crypto.randomBytes(16).toString('hex');
+
+        db.run(`UPDATE users SET resetToken = ? WHERE id = ?`, [token, user.id], (updateErr) => {
+            if (updateErr) return res.status(500).json({ error: updateErr.message });
+
+            sendMail(
+                email,
+                'Nulstilling af adgangskode',
+                `Du har bedt om at nulstille din adgangskode. Din nulstillingskode er: ${token}`
+            );
+
+            res.json({ message: "Reset email sent" });
+        });
+    });
 });
 
 module.exports = router;
