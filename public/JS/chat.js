@@ -1,5 +1,6 @@
 let currentConversationId = null;
 let pollInterval = null;
+let allConversations = [];
 
 // DOM references
 const conversationList = document.getElementById("conversation-list");
@@ -21,13 +22,28 @@ async function loadConversations() {
     }
 
     const conversations = await res.json();
+    allConversations = conversations; // gem globalt
 
     conversationList.innerHTML = "";
 
     conversations.forEach(conv => {
         const div = document.createElement("div");
         div.classList.add("conversation");
-        div.textContent = "Samtale #" + conv.id;
+
+        // Rolle-oversættelse (engelsk → dansk)
+        const roleMap = {
+            host: "vært",
+            participant: "deltager"
+        };
+
+        const roleLabel = roleMap[conv.otherUserRole] || conv.otherUserRole;
+
+        // Den tekst vi viser
+        div.textContent = `${conv.otherUserName} (${roleLabel})`;
+
+        // Gem id, så vi kan markere aktiv samtale senere
+        div.dataset.id = conv.id;
+
         div.onclick = () => openConversation(conv.id);
         conversationList.appendChild(div);
     });
@@ -35,24 +51,36 @@ async function loadConversations() {
 
 
 // Åbn en samtale
-
 async function openConversation(id) {
     currentConversationId = id;
-    chatTitle.textContent = "Samtale #" + id;
 
-    // marker aktiv
+    // Find navnet og rollen fra allConversations
+    const convo = allConversations.find(c => c.id === id);
+
+    if (convo) {
+        const roleMap = {
+            host: "vært",
+            participant: "deltager"
+        };
+
+        const roleLabel = roleMap[convo.otherUserRole] || convo.otherUserRole;
+
+        chatTitle.textContent = `${convo.otherUserName} (${roleLabel})`;
+    } else {
+        chatTitle.textContent = "Samtale";
+    }
+
+    // Markér aktiv samtale i venstre liste
     document.querySelectorAll(".conversation").forEach(c => c.classList.remove("active"));
-    const convDiv = [...document.querySelectorAll(".conversation")].find(c => c.textContent === "Samtale #" + id);
+    const convDiv = document.querySelector(`.conversation[data-id="${id}"]`);
     if (convDiv) convDiv.classList.add("active");
 
     loadMessages();
 
-    // stop tidligere polling
     if (pollInterval) clearInterval(pollInterval);
-
-    // poll hvert 2 sek.
     pollInterval = setInterval(loadMessages, 2000);
 }
+
 
 // Hent beskeder
 async function loadMessages() {
@@ -68,9 +96,29 @@ async function loadMessages() {
         div.classList.add("message");
         if (msg.isYou) div.classList.add("you");
 
-        div.textContent = msg.content;
+        // simpelt timestamp: "HH:MM"
+        let timeText = "";
+        if (msg.timestamp) {
+            // forventer format "YYYY-MM-DD HH:MM:SS"
+            timeText = msg.timestamp.slice(11, 16);
+        }
+
+        // indhold + tidsstempel
+        const contentP = document.createElement("div");
+        contentP.textContent = msg.content;
+
+        const timeSpan = document.createElement("span");
+        timeSpan.classList.add("message-time");
+        timeSpan.textContent = timeText;
+
+        div.appendChild(contentP);
+        if (timeText) {
+            div.appendChild(timeSpan);
+        }
+
         messagesDiv.appendChild(div);
     });
+
 
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }

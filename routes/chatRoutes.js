@@ -12,18 +12,32 @@ router.get('/conversations', requireLogin, (req, res) => {
     const userId = req.session.user.id;
 
     db.all(
-        `SELECT id, hostId, participantId 
-         FROM conversations 
-         WHERE hostId = ? OR participantId = ?`,
-        [userId, userId],
+        `
+        SELECT 
+          c.id,
+          CASE 
+            WHEN c.hostId = ? THEN p.name      -- hvis jeg er vært, så er "other" participant
+            ELSE h.name                        -- hvis jeg er deltager, så er "other" vært
+          END AS otherUserName,
+          CASE 
+            WHEN c.hostId = ? THEN p.role
+            ELSE h.role
+          END AS otherUserRole
+        FROM conversations c
+        JOIN users h ON c.hostId = h.id       -- h = host user
+        JOIN users p ON c.participantId = p.id -- p = participant user
+        WHERE c.hostId = ? OR c.participantId = ?
+        ORDER BY c.id ASC
+        `,
+        [userId, userId, userId, userId],
         (err, rows) => {
             if (err) return res.status(500).json({ error: err.message });
 
-            // Simpelt svar – frontend bruger kun id lige nu
-            res.json(rows);
+            res.json(rows); // Hver række har: id, otherUserName, otherUserRole
         }
     );
 });
+
 
 
 // POST /api/chat/conversations
