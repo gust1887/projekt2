@@ -7,6 +7,8 @@ const messagesDiv = document.getElementById("messages");
 const chatTitle = document.getElementById("chat-title");
 const sendBtn = document.getElementById("send-btn");
 const messageInput = document.getElementById("message-input");
+const userListDiv = document.getElementById("user-list");
+
 
 
 // Hent samtaler
@@ -91,5 +93,57 @@ async function sendMessage() {
     loadMessages();
 }
 
-// ---------------
+// Hent brugere til "Start ny samtale"
+async function loadUsers() {
+    const res = await fetch('/api/users');
+    if (!res.ok) {
+        console.error("Kunne ikke hente brugere");
+        return;
+    }
+
+    const users = await res.json();
+    userListDiv.innerHTML = "";
+
+    users.forEach(user => {
+        const div = document.createElement("div");
+        div.classList.add("user-item");
+        const roleLabels = {
+            host: 'vært',
+            participant: 'deltager'
+        };
+        const roleLabel = roleLabels[user.role] || user.role;
+        div.textContent = `${user.name} (${roleLabel})`;
+        div.onclick = () => startConversation(user.id);
+        userListDiv.appendChild(div);
+    });
+}
+
+// Start en ny samtale med en anden bruger
+async function startConversation(otherUserId) {
+    try {
+        const res = await fetch('/api/chat/conversations', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ otherUserId })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            alert(data.error || "Kunne ikke oprette samtale");
+            return;
+        }
+
+        // hent samtaler igen og åbn den nye
+        await loadConversations();
+        openConversation(data.id);
+    } catch (err) {
+        console.error(err);
+        alert("Serverfejl ved oprettelse af samtale");
+    }
+}
+
+
+
+loadUsers();
 loadConversations();

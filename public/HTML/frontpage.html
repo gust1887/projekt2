@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +11,23 @@
     <!-- CSS kun til forsiden -->
     <link rel="stylesheet" href="/CSS/frontpage.css">
 </head>
+
 <body>
 
     <!-- Øverste blå linje med logo til venstre og menupunkter til højre -->
     <header class="top-nav">
         <div class="nav-left">
-            <!-- Logo-billede -->
-            <img src="/images/BIT.png" alt="Bit Chat logo" class="nav-logo">
+            <a href="/">
+                <!-- Logo-billede -->
+                <img src="/images/BIT.png" alt="Bit Chat logo" class="nav-logo">
+            </a>
         </div>
 
         <!-- Menupunkter til højre -->
         <nav class="nav-right">
-            <a href="whatweoffer">Hvad tilbyder vi</a>
-            <a href="howdoesbitchatwork">Hvordan fungerer Bit Chat</a>
+            <a href="/chat">Chat</a>
+            <a href="/whatweoffer">Hvad tilbyder vi</a>
+            <a href="/howdoesbitchatwork">Hvordan fungerer Bit Chat</a>
         </nav>
     </header>
 
@@ -33,9 +38,8 @@
 
     <!-- Knapper midt på billedet -->
     <div class="frontpage-action-box">
-        <a href="login" class="action-btn">Log ind</a>
-        <a href="forgotpassword" class="action-btn">Glemt adgangskode</a>
-        <a href="createaccount" class="action-btn">Opret bruger</a>
+        <a href="/login" class="action-btn">Log ind</a>
+        <a href="/createaccount" class="action-btn">Opret bruger</a>
     </div>
 
     <!-- Bundsektion med budskab -->
@@ -45,6 +49,5 @@
     </section>
 
 </body>
+
 </html>
-
-

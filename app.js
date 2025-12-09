@@ -66,6 +66,10 @@ app.use('/api/auth', authRoutes);
 const chatRoutes = require('./routes/chatRoutes');
 app.use('/api/chat', chatRoutes);
 
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/users', userRoutes);
+
+
 
 const port = 3000;
 app.listen(port, () => {

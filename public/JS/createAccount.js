@@ -1,3 +1,12 @@
+// Hvis brugeren allerede er logget ind, send til chat
+fetch("/api/auth/me")
+  .then(res => res.json())
+  .then(data => {
+    if (data.loggedIn) {
+        window.location.href = "/chat";
+    }
+  });
+
 const form = document.getElementById('create-account-form');
 
 if (form) {

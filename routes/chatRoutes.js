@@ -49,20 +49,42 @@ router.post('/conversations', requireLogin, (req, res) => {
         participantId = userId;
     }
 
-    db.run(
-        `INSERT INTO conversations (hostId, participantId) VALUES (?, ?)`,
+    // 1) Tjek om samtalen allerede findes
+    db.get(
+        `SELECT id, hostId, participantId
+         FROM conversations
+         WHERE hostId = ? AND participantId = ?`,
         [hostId, participantId],
-        function (err) {
+        (err, row) => {
             if (err) return res.status(500).json({ error: err.message });
 
-            res.status(201).json({
-                id: this.lastID,
-                hostId,
-                participantId
-            });
+            if (row) {
+                // Hvis samtale allerede findes, returner den i stedet for at lave en ny
+                return res.json({
+                    id: row.id,
+                    hostId: row.hostId,
+                    participantId: row.participantId
+                });
             }
-        );
+
+            // Ellers opret ny samtale
+            db.run(
+                `INSERT INTO conversations (hostId, participantId) VALUES (?, ?)`,
+                [hostId, participantId],
+                function (err) {
+                    if (err) return res.status(500).json({ error: err.message });
+
+                    res.status(201).json({
+                        id: this.lastID,
+                        hostId,
+                        participantId
+                    });
+                }
+            );
+        }
+    );
 });
+
 
 // Hjælper til at tjekke om bruger må se/skriv i samtalen
 const assertUserInConversation = (conversationId, userId, callback) => {
