@@ -2,6 +2,21 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+
+const session = require('express-session');
+
+app.use(session({
+  secret: 'midlertidig', // skiftes senere: ENV-variabel
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    // secure: true, // slå til når I kun kører HTTPS
+    maxAge: 1000 * 60 * 60 // 1 time
+  }
+}));
+
+
 // Middleware
 app.use(express.json());
 
@@ -30,6 +45,11 @@ app.get('/whatweoffer', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'HTML', 'whatweoffer.html'));
 });
 
+app.get('/chat', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'HTML', 'chat.html'));
+});
+
+
 // Husk at slette denne inden aflevering
 app.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'HTML', 'test.html'));
@@ -42,6 +62,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Henter routes
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+const chatRoutes = require('./routes/chatRoutes');
+app.use('/api/chat', chatRoutes);
 
 
 const port = 3000;

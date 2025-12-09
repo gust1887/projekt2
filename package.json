@@ -1,28 +1,54 @@
 {
 
   "name": "projekt2",
+
   "version": "1.0.0",
+
   "description": "",
+
   "main": "index.js",
-  "devDependencies": {},
+
   "scripts": {
+
     "start": "node app.js"
+
   },
+
   "repository": {
+
     "type": "git",
+
     "url": "git+https://github.com/gust1887/projekt2.git"
+
   },
+
   "keywords": [],
+
   "author": "",
+
   "license": "ISC",
+
   "type": "commonjs",
+
   "dependencies": {
+
     "express": "^5.1.0",
+
+    "express-session": "^1.18.2",
+
     "nodemailer": "^6.9.14",
+
     "sqlite3": "^5.1.7"
+
   },
+
   "bugs": {
+
     "url": "https://github.com/gust1887/projekt2/issues"
+
   },
+
   "homepage": "https://github.com/gust1887/projekt2#readme"
+
 }
+

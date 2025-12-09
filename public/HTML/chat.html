@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - Bit Chat</title>
+
+    <link rel="stylesheet" href="/CSS/bitchat-theme.css">
+    <link rel="stylesheet" href="/CSS/chat.css" />
+</head>
+
+<body>
+
+    <!-- Topbar genbrugt fra de andre sider -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <img src="/images/BIT.png" class="nav-logo" alt="Bit Chat logo">
+        </div>
+
+        <nav class="nav-right">
+            <a href="/">Forside</a>
+            <a href="/whatweoffer">Hvad tilbyder vi</a>
+            <a href="/howdoesbitchatwork">Hvordan fungerer Bit Chat</a>
+        </nav>
+    </header>
+
+    <!-- Selve chat-indholdet -->
+    <section class="chat-section">
+        <div class="chat-container">
+
+            <!-- VENSTRE: Conversations -->
+            <aside id="conversations" class="chat-sidebar">
+                <h2>Dine samtaler</h2>
+                <div id="conversation-list"></div>
+            </aside>
+
+            <!-- HØJRE: Chat + beskeder -->
+            <main id="chat-area" class="chat-main">
+                <h2 id="chat-title">Vælg en samtale</h2>
+
+                <div id="messages"></div>
+
+                <div id="input-area">
+                    <input id="message-input" placeholder="Skriv en besked..." />
+                    <button id="send-btn">Send</button>
+                </div>
+            </main>
+
+        </div>
+    </section>
+
+    <script src="/JS/chat.js"></script>
+</body>
+</html>

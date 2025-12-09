@@ -11,6 +11,11 @@ const crypto = require('crypto');
 // Register endpoint
 router.post('/register', (req, res) => {
     const { name, email, password, role } = req.body;
+
+    if (!name || !email || !password || !role) {
+        return res.status(400).json({ error: "Navn, email, password og rolle er påkrævet" });
+    }
+    
     const { salt, hash } = hashPassword(password);
 
     db.run(
@@ -28,17 +33,50 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
+    // Hent bruger fra DB
     db.get(
-        `SELECT password, salt FROM users WHERE email = ?`, [email], (err, row) => {
+        `SELECT id, name, email, role, password, salt FROM users WHERE email = ?`,
+        [email],
+        (err, user) => {
             if (err) return res.status(500).json({ error: err.message });
-            if (!row) return res.status(401).json({ error: "Bruger findes ikke" });
-            if (validatePassword(password, row.salt, row.password)) {
-                res.json({ message: "Login OK" });
-            } else {
-                res.status(401).json({ error: "Forkert password" });
+            if (!user) return res.status(401).json({ error: "Bruger findes ikke" });
+
+            // Tjek password via validatePassword
+            const valid = validatePassword(password, user.salt, user.password);
+            if (!valid) {
+                return res.status(401).json({ error: "Forkert password" });
             }
+
+            // Gem brugerinfo i session (uden password og salt)
+            req.session.user = {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            };
+
+            console.log("User logged in:", req.session.user);
+
+            // Send OK svar til frontend
+            return res.json({ success: true });
         }
     );
+});
+
+// Check login status (debug)
+router.get('/me', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ loggedIn: false });
+    }
+    res.json({ loggedIn: true, user: req.session.user });
+});
+
+
+// Logout endpoint
+router.post('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.json({ success: true });
+    });
 });
 
 // Simpel rute til glemt password der sender nulstillingskode på mail

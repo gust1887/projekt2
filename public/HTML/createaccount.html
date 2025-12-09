@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,18 +26,26 @@
         <div class="form-box">
             <h1>Opret bruger</h1>
 
-            <form>
+            <form id="create-account-form">
                 <label>Navn</label>
-                <input type="text" required>
+                <input type="text" name="name" required>
 
                 <label>Email</label>
-                <input type="email" required>
+                <input type="email" name="email" required>
 
                 <label>Adgangskode</label>
-                <input type="password" required>
+                <input type="password" name="password" required>
+
+                <label>Rolle</label>
+                <select name="role" required>
+                    <option value="">Vælg rolle</option>
+                    <option value="host">Vært</option>
+                    <option value="participant">Deltager</option>
+                </select>
 
                 <button type="submit" class="action-btn">Opret bruger</button>
             </form>
+
         </div>
     </section>
 
@@ -44,5 +53,7 @@
         <a href="/" class="back-btn">Tilbage til forsiden</a>
     </section>
 
+    <script src="/JS/createAccount.js"></script>
 </body>
+
 </html>

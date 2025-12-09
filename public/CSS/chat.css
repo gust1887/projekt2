@@ -1,0 +1,132 @@
+/* Layout omkring chatten */
+.chat-section {
+    display: flex;
+    justify-content: center;
+    padding-top: 90px;
+    padding-bottom: 40px;
+}
+
+/* Selve chat-boksen */
+.chat-container {
+    display: flex;
+    width: min(1500px, 100% - 120px);
+    height: min(70vh, 900px);
+    background-color: #234D23;          /* mørk grøn boks, matcher form-box */
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    min-height: 600px;
+}
+
+/* Venstre side: samtale-liste */
+#conversations {
+    width: 30%;
+    border-right: 1px solid rgba(241, 249, 126, 0.25); /* citrus-ish kant */
+    overflow-y: auto;
+    padding: 18px;
+    background-color: #234D23;
+    color: #f1f97e;
+}
+
+#conversations h2 {
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+/* Samtale-elementer */
+.conversation {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: #214E27;               /* grøn baggrund */
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: background 0.2s, transform 0.1s;
+    font-size: 14px;
+}
+
+.conversation:hover {
+    background: #275a2f;
+    transform: translateY(-1px);
+}
+
+.conversation.active {
+    background: #2f6b37;
+    border-left: 3px solid #f1f97e;    /* citrus highlight */
+}
+
+/* Højre side: chatområde */
+#chat-area.chat-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    color: #f1f97e;
+}
+
+#chat-title {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+}
+
+/* Besked-listen */
+#messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 12px;
+    background: #214E27;              /* grøn baggrund */
+    border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+/* Enkelt besked */
+.message {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: #2b5b33;              /* boble fra modpart */
+    display: inline-block;
+    max-width: 75%;
+    font-size: 14px;
+}
+
+/* Dine egne beskeder */
+.message.you {
+    background: #f1f97e;              /* citrus-boble */
+    color: #214E27;
+    margin-left: auto;
+}
+
+/* Input-område nederst */
+#input-area {
+    display: flex;
+    margin-top: 14px;
+    gap: 10px;
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 10px 12px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+/* Send-knap – samme stil som action-btn */
+#send-btn {
+    padding: 10px 20px;
+    background-color: #f1f97e;        /* citrus */
+    color: #214E27;                   /* grøn tekst */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+#send-btn:hover {
+    background-color: #e4ee74;
+}
