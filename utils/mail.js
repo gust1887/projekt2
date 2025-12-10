@@ -1,16 +1,19 @@
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-// Simpel opsætning af Gmail-transportør som i et lærereksempel
+// Simpel opsætning af Gmail-transportør, nu med konfiguration fra .env
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: Number(process.env.SMTP_PORT) || 587,
+    secure: Number(process.env.SMTP_PORT) === 465,
     auth: {
-        user: 'cbs2025test@gmail.com',
-        pass: 'testpassword123'
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
     }
 });
 
 // Bekræfter at transportøren er klar
-transporter.verify((error, success) => {
+transporter.verify((error) => {
     if (error) {
         console.error('Mailer fejl', error);
     } else {
@@ -19,12 +22,13 @@ transporter.verify((error, success) => {
 });
 
 // Enkel hjælpefunktion til at sende mails
-function sendMail(to, subject, text) {
+function sendMail(to, subject, text, html) {
     const mailOptions = {
-        from: 'CBS-2025 <cbs2025test@gmail.com>',
+        from: process.env.MAIL_FROM || process.env.SMTP_USER,
         to,
         subject,
-        text
+        text,
+        html
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
