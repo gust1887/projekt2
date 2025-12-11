@@ -13,7 +13,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    // secure: true, // slå til når I kun kører HTTPS
+    // secure: true,
     maxAge: 1000 * 60 * 60 // 1 time
   }
 }));
