@@ -2,10 +2,10 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config();
 const app = express();
-
-
-
 const session = require('express-session');
+
+
+app.set('trust proxy', 1); // nginx / DigitalOcean proxy
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'fallback-secret',
@@ -13,7 +13,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: true,
+    // secure: true,
     maxAge: 1000 * 60 * 60 // 1 time
   }
 }));
