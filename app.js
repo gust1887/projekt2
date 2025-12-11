@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
 const app = express();
+
 
 
 const session = require('express-session');
 
 app.use(session({
-  secret: 'midlertidig', // skiftes senere: ENV-variabel
-  resave: false,
+  secret: process.env.SESSION_SECRET || 'fallback-secret',
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
@@ -50,11 +51,6 @@ app.get('/chat', (req, res) => {
 });
 
 
-// Husk at slette denne inden aflevering
-app.get('/test', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'HTML', 'test.html'));
-});
-
 
 // Statisk public-mappe til frontend filer
 app.use(express.static(path.join(__dirname, 'public')));
@@ -74,6 +70,4 @@ app.use('/api/users', userRoutes);
 const port = 3000;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-  console.log('Ændrede filer: db.js, routes/authRoutes.js, utils/mail.js, package.json');
-  console.log('Glemt kode rute: POST /api/auth/forgot-password med body {"email": "brugers@mail.com"}');
 })

@@ -14,12 +14,7 @@ db.serialize(() => {
     role TEXT CHECK(role IN ('host', 'participant')) DEFAULT 'participant'
   )`);
 
-    // Simpel tilføjelse af resetToken-kolonne hvis databasen allerede findes
-    db.run(`ALTER TABLE users ADD COLUMN resetToken TEXT`, (err) => {
-        if (err) {
-            console.log('resetToken kolonne findes måske allerede');
-        }
-    });
+
 
     // Samtaler
     db.run(`CREATE TABLE IF NOT EXISTS conversations (
