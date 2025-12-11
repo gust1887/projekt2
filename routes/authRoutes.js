@@ -79,7 +79,7 @@ router.post('/logout', (req, res) => {
     });
 });
 
-// Simpel rute til glemt password der sender nulstillingskode på mail
+// Rute til glemt password der genererer ny adgangskode og sender på mail
 router.post('/forgot-password', (req, res) => {
     const { email } = req.body;
 
@@ -87,21 +87,39 @@ router.post('/forgot-password', (req, res) => {
 
     db.get(`SELECT id FROM users WHERE email = ?`, [email], (err, user) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (!user) return res.status(404).json({ error: "User not found" });
 
-        const token = crypto.randomBytes(16).toString('hex');
+        /* For sikkerhed: svar "ok" selv om brugeren ikke findes,
+         så man ikke kan gætte hvilke emails der er registreret */
+        if (!user) {
+            return res.json({ message: "Hvis emailen findes, er der sendt en ny adgangskode" });
+        }
 
-        db.run(`UPDATE users SET resetToken = ? WHERE id = ?`, [token, user.id], (updateErr) => {
-            if (updateErr) return res.status(500).json({ error: updateErr.message });
+        // Lav nyt midlertidigt password (12 tegn)
+        const newPassword = crypto.randomBytes(6).toString('base64').replace(/[^a-zA-Z0-9]/g, '').slice(0, 12);
 
-            sendMail(
-                email,
-                'Nulstilling af adgangskode',
-                `Du har bedt om at nulstille din adgangskode. Din nulstillingskode er: ${token}`
-            );
+        // Hash det nye password
+        const { salt, hash } = hashPassword(newPassword);
 
-            res.json({ message: "Reset email sent" });
-        });
+        // Opdater brugerens password + salt
+        db.run(
+            `UPDATE users SET password = ?, salt = ?, resetToken = NULL WHERE id = ?`,
+            [hash, salt, user.id],
+            (updateErr) => {
+                if (updateErr) return res.status(500).json({ error: updateErr.message });
+
+                // Send mail med nyt password
+                sendMail(
+                    email,
+                    'Ny adgangskode til Bit Chat',
+                    `Din adgangskode er nu blevet nulstillet.\n\nDin nye adgangskode er: ${newPassword}\n\nLog ind og skift den så hurtigt som muligt.`,
+                    `<p>Din adgangskode er nu blevet nulstillet.</p>
+                     <p><strong>Ny adgangskode:</strong> ${newPassword}</p>
+                     <p>Du kan nu logge ind med denne adgangskode. Gem den et sikkert sted.</p>`
+                );
+
+                return res.json({ message: "Hvis emailen findes, er der sendt en ny adgangskode" });
+            }
+        );
     });
 });
 

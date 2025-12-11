@@ -22,7 +22,7 @@ transporter.verify((error) => {
 });
 
 // Enkel hjælpefunktion til at sende mails
-function sendMail(to, subject, text, html) {
+const sendMail = (to, subject, text, html) => {
     const mailOptions = {
         from: process.env.MAIL_FROM || process.env.SMTP_USER,
         to,
