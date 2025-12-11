@@ -15,15 +15,21 @@ router.post('/register', (req, res) => {
     if (!name || !email || !password || !role) {
         return res.status(400).json({ error: "Navn, email, password og rolle er påkrævet" });
     }
-    
+
     const { salt, hash } = hashPassword(password);
 
     db.run(
         `INSERT INTO users (name, email, password, salt, role) VALUES (?, ?, ?, ?, ?)`,
         [name, email, hash, salt, role],
-        function (err) {
-            if (err) return res.status(500).json({ error: err.message });
-            res.json({ id: this.lastID });
+         function (err) {
+            if (err) {
+                // Hvis email allerede findes
+                if (err.message.includes("UNIQUE") || err.message.includes("email")) {
+                    return res.status(400).json({ error: "Email er allerede registreret" });
+                }
+                return res.status(500).json({ error: "Databasefejl: " + err.message });
+            }
+            return res.json({ id: this.lastID });
         }
     );
 });
