@@ -9,6 +9,7 @@ const session = require('express-session');
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'fallback-secret',
+  resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
